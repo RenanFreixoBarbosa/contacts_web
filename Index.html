@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista Telefônica</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>📞 Lista Telefônica</h1>
+
+    <form id="contact-form">
+      <input type="text" id="name" placeholder="Nome" required />
+      <input type="email" id="email" placeholder="E-mail" required />
+      <input type="tel" id="phone" placeholder="Telefone" required />
+      <button type="button" onclick="saveOrEditContact()">Salvar</button>
+    </form>
+
+    <ul id="contact-list"></ul>
+  </div>
+</body>
+</html>
