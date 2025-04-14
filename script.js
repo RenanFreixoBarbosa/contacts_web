@@ -7,7 +7,6 @@ const contactList = document.getElementById('contact-list');
 let contacts = [];
 let editingId = null;
 
-// Função para buscar contatos
 async function fetchContacts() {
   const res = await fetch('http://localhost:5000/api/contacts/');
   const data = await res.json();
@@ -18,11 +17,10 @@ async function fetchContacts() {
 async function saveOrEditContact() {
   const nome = nameInput.value.trim();
   const email = emailInput.value.trim();
-  const telefone = phoneInput.value.replace(/\D/g, ''); // Remove a máscara do telefone
+  const telefone = phoneInput.value.replace(/\D/g, '');
 
   if (nome && email && telefone) {
     if (editingId === null) {
-      // Criar novo contato
       await fetch('http://localhost:5000/api/contact/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -33,7 +31,6 @@ async function saveOrEditContact() {
         }),
       });
     } else {
-      // Editar contato
       await fetch('http://localhost:5000/api/contact/', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -44,15 +41,14 @@ async function saveOrEditContact() {
           phone: telefone
         }),
       });
-      editingId = null; // Limpa o id após a edição
+      editingId = null;
     }
 
     form.reset();
-    fetchContacts(); // Recarrega os contatos após salvar
+    fetchContacts();
   }
 };
 
-//Renderizar Contatos
 function renderContacts() {
   contactList.innerHTML = '';
   contacts.forEach((contact) => {
@@ -97,7 +93,6 @@ async function deleteContact(id) {
   }
 }
 
-// Máscara de telefone
 function formatPhone(phone) {
   const cleaned = phone.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
@@ -121,5 +116,4 @@ phoneInput.addEventListener('input', (e) => {
   e.target.value = value;
 });
 
-// Buscar contatos assim que a página carregar
 fetchContacts();
